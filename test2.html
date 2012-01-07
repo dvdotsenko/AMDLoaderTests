@@ -1,0 +1,32 @@
+<!DOCTYPE html> 
+<html> 
+ <head> 
+  <title>testing AMDing jQuery</title>
+</head> 
+<body>
+<div id='page'>
+    <div id="message">This one loads jQuery inside AMD loader then uses jq, plugin inside of AMD loader. </div>
+    <div>We expect to see '2' here: '<span id='checkin'>0</span>'</div>
+</div>
+<script type="text/javascript">
+    window.CheckIn = function(name){
+        if (typeof console !== 'undefined' && typeof console.log === 'function') {
+            console.log(name + " Checked In")
+        }
+        var e = document.getElementById('checkin')
+        e.innerText = parseInt(e.innerText) + 1
+    }
+</script>
+<script type="text/javascript">
+    curl = {
+        baseUrl: './' 
+        , paths: {
+            // jquery: 'js/libs/jquery.virtual' 
+        }
+        , apiName: 'require'
+    };
+</script>
+<script src="js/libs/curl-0.5.4.min.js"></script>
+<script src="js/loader.js"></script>
+</body>
+</html>
