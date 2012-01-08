@@ -1,0 +1,35 @@
+<!DOCTYPE html> 
+<html> 
+ <head> 
+  <title>testing AMDing jQuery</title>
+</head> 
+<body>
+<div id='page'>
+    <div id="message">This one loads jQuery after, but outside of AMD loader then calls plugin inline. </div>
+    <div>We expect to see '1' here: '<span id='checkin'>0</span>'</div>
+</div>
+<script type="text/javascript">
+    window.CheckIn = function(name){
+        if (typeof console !== 'undefined' && typeof console.log === 'function') {
+            console.log(name + " Checked In")
+        }
+        var e = document.getElementById('checkin')
+        e.innerText = parseInt(e.innerText) + 1
+    }
+</script>
+<script src="js/libs/require.js"></script>
+<script type="text/javascript">
+  require.config({
+    baseUrl: "./",
+    paths: {},
+    waitSeconds: 15,
+  })
+</script>
+<script src="js/libs/jquery.virtual.js"></script>
+<script src="js/libs/jquery.barnacle.js"></script>
+<script type="text/javascript">
+    // simulating calling jq plugin
+    $.fn.barnacle()
+</script>
+</body>
+</html>
